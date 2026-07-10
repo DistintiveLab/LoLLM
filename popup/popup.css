@@ -1,4 +1,52 @@
 body {
     font-family: sans-serif;
-    width: 300px;
+    width: 320px;
+}
+
+.field {
+    margin-bottom: 10px;
+}
+
+label {
+    display: block;
+    margin-bottom: 4px;
+}
+
+button {
+    margin-top: 4px;
+}
+
+.buttons {
+    display: flex;
+    gap: 8px;
+    margin-top: 4px;
+}
+
+#test-btn {
+    background-color: #f0f0f0;
+}
+
+#test-btn:disabled {
+    opacity: 0.5;
+    cursor: default;
+}
+
+.test-result {
+    margin-top: 10px;
+    font-size: 13px;
+    white-space: pre-wrap;
+    line-height: 1.4;
+}
+
+.test-result.ok {
+    color: #2e7d32;
+}
+
+.test-result.err {
+    color: #c62828;
+}
+
+.test-result ul {
+    margin: 6px 0 0 0;
+    padding-left: 18px;
 }

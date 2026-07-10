@@ -7,10 +7,25 @@
 <body>
     <h1>LeafLLM Settings</h1>
     <form id="settings-form">
-        <label for="api-key">API Key:</label>
-        <input type="text" id="api-key" name="apiKey" size="40">
-        <button type="submit">Save</button>
+        <div class="field">
+            <label for="api-key">API Key:</label>
+            <input type="password" id="api-key" name="apiKey" size="40" autocomplete="off">
+        </div>
+        <div class="field">
+            <label for="endpoint-url">Endpoint URL:</label>
+            <input type="text" id="endpoint-url" name="endpointUrl" size="40"
+                   placeholder="https://api.openai.com/v1/chat/completions">
+        </div>
+        <div class="field">
+            <label for="model">Model:</label>
+            <input type="text" id="model" name="model" size="40" placeholder="gpt-3.5-turbo">
+        </div>
+        <div class="buttons">
+            <button type="submit">Save</button>
+            <button type="button" id="test-btn">Test connection</button>
+        </div>
     </form>
+    <div id="test-result" class="test-result"></div>
     <script src="popup.js"></script>
 </body>
 </html>
