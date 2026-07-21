@@ -50,3 +50,32 @@ button {
     margin: 6px 0 0 0;
     padding-left: 18px;
 }
+
+.divider {
+    margin: 14px 0 8px 0;
+    border: none;
+    border-top: 1px solid #ddd;
+}
+
+.sponsor {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    text-decoration: none;
+    color: #555;
+    font-size: 12px;
+}
+
+.sponsor:hover {
+    color: #000;
+}
+
+.sponsor-label {
+    font-style: italic;
+}
+
+.sponsor-logo {
+    width: 32px;
+    height: 32px;
+    vertical-align: middle;
+}

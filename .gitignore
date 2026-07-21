@@ -91,4 +91,7 @@ fabric.properties
 
 # End of https://www.toptal.com/developers/gitignore/api/intellij+all
 
-LeafLLM*.zip
+# web-ext build/sign output (Firefox/Chrome packaging)
+web-ext-artifacts/
+*.xpi
+[Ll]o[Ll][Ll]M*.zip

@@ -7,21 +7,26 @@ document.addEventListener('DOMContentLoaded', function () {
     const testResult = document.getElementById('test-result');
 
     function setResult(text, kind, tried) {
-        let html = '';
-        if (text) html += escapeHtml(text);
-        if (tried && tried.length) {
-            html += '\n\nTried:';
-            html += '<ul>' + tried.map(function (t) {
-                return '<li>' + escapeHtml(t.endpoint) + ' &rarr; ' + escapeHtml(t.detail) + '</li>';
-            }).join('') + '</ul>';
-        }
-        testResult.innerHTML = html;
+        testResult.textContent = '';
         testResult.className = 'test-result' + (kind ? ' ' + kind : '');
-    }
-
-    function escapeHtml(s) {
-        return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;')
-            .replace(/>/g, '&gt;');
+        if (text) {
+            const p = document.createElement('div');
+            p.textContent = text;
+            testResult.appendChild(p);
+        }
+        if (tried && tried.length) {
+            const label = document.createElement('div');
+            label.textContent = 'Tried:';
+            label.style.marginTop = '8px';
+            testResult.appendChild(label);
+            const ul = document.createElement('ul');
+            tried.forEach(function (t) {
+                const li = document.createElement('li');
+                li.textContent = t.endpoint + ' \u2192 ' + t.detail;
+                ul.appendChild(li);
+            });
+            testResult.appendChild(ul);
+        }
     }
 
     // Load saved settings

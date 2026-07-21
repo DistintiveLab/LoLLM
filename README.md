@@ -1,10 +1,10 @@
-# LeafLLM
+# LoLLM (Leaf open-LLM)
 
-LeafLLM is a privacy-respecting browser extension that brings the power of
-large-language models (LLMs) into your browser. Right-click any text and choose
-**Summarize**, or use the **Complete / Improve / Ask** keyboard shortcuts inside
-an editor (e.g. the Overleaf source editor). It works with **any
-OpenAI-compatible Chat Completion API** — point it at OpenAI, a local
+LoLLM (formerly LeafLLM) is a privacy-respecting browser extension that brings
+the power of large-language models (LLMs) into your browser. Right-click any
+text and choose **Summarize**, or use the **Complete / Improve / Ask** keyboard
+shortcuts inside an editor (e.g. the Overleaf source editor). It works with
+**any OpenAI-compatible Chat Completion API** — point it at OpenAI, a local
 [vLLM](https://docs.vllm.ai/) / [llama.cpp](https://github.com/ggerganov/llama.cpp)
 server, or any other compatible endpoint by setting the **Endpoint URL**, **API
 key** and **model** in the settings popup.
@@ -16,6 +16,11 @@ Manifest V2, both of which are supported by Firefox. The keyboard-shortcut tools
 (recall the original GPT4Overleaf `Alt+C` / `Alt+I` / `Alt+A`) are implemented
 and described in [Usage](#usage).
 
+## Sponsor
+The development of LoLLM was sponsored by
+[**Distintive**](https://distintive.com.br) — inteligência para políticas
+públicas. Their logo is shown in the extension's settings popup.
+
 ## Installation
 
 ### Firefox (temporary load — for development / testing)
@@ -23,7 +28,7 @@ and described in [Usage](#usage).
 2. Open Firefox and navigate to `about:debugging#/runtime/this-firefox`.
 3. Click **"Load Temporary Add-on..."**.
 4. Select the `manifest.json` file in the repository folder.
-5. The LeafLLM icon appears in the toolbar. (Temporary add-ons are removed when
+5. The LoLLM icon appears in the toolbar. (Temporary add-ons are removed when
    Firefox restarts.)
 
 ### Firefox (permanent / distribution)
@@ -32,13 +37,30 @@ To install permanently, the add-on must be signed through
 a package with the `web-ext` CLI:
 
 ```bash
+# 1. Install the web-ext CLI (one-time)
 npm install -g web-ext
-web-ext build                      # creates a .zip in web-ext-artifacts/
-web-ext sign --api-key=<JWT_ISSUER> --api-secret=<JWT_SECRET>
+
+# 2. (Optional) Lint the extension source for AMO compliance
+web-ext lint
+
+# 3. Build the unsigned .zip package
+web-ext build                      # creates lollm-1.0.0.zip in web-ext-artifacts/
+
+# 4. Sign it for self-distribution / unlisted / listed on AMO.
+#    Get JWT_ISSUER (API key) and JWT_SECRET (API secret) from
+#    https://addons.mozilla.org/developers/ -> "API Keys" page.
+web-ext sign --api-key=<JWT_ISSUER> --api-secret=<JWT_SECRET> --channel=unlisted
+
+# 5. Load the produced signed .xpi into Firefox (about:debugging),
+#    or upload the .xpi to AMO for public distribution.
+#    Upload for review/publishing at https://addons.mozilla.org/developers/addon/submit/
 ```
 
-The `browser_specific_settings.gecko.id` (`leafllm@bthink.bgu.ac.il`) in
-`manifest.json` is required for signing and is already set.
+The `browser_specific_settings.gecko.id` (`lollm@bthink.bgu.ac.il`) in
+`manifest.json` is required for signing and is already set. (If you already
+published the add-on under the old `leafllm@bthink.bgu.ac.il` id and want to
+keep the same AMO listing, leave that id in place; the visible name is taken
+from `manifest.json` `name`, so the rename still shows up to users.)
 
 ### Chrome (manual installation)
 1. Clone the repository.
@@ -51,7 +73,7 @@ The `browser_specific_settings.gecko.id` (`leafllm@bthink.bgu.ac.il`) in
    `chrome.*` callback APIs differ from the promise-based `browser.*` API.)
 
 ## Configuration
-Click the LeafLLM button in the browser toolbar to open the settings popup.
+Click the LoLLM button in the browser toolbar to open the settings popup.
 There are three fields, all stored locally using the browser's **local**
 storage (so changing them takes effect immediately on the next invocation):
 
@@ -86,7 +108,7 @@ result area.
 
 ### Summarize (context menu)
 1. Select any text on a web page.
-2. Right-click and choose **Summarize** (the LeafLLM context-menu item).
+2. Right-click and choose **Summarize** (the LoLLM context-menu item).
 3. A small popup appears in the top-right corner of the page showing a loading
    indicator, then the summary. Click the **×** to dismiss it.
 
@@ -172,8 +194,14 @@ cross-browser `browser.*` API:
   endpoint URL is set at runtime, so a single broad host permission is required).
 - **CSP:** simplified `content_security_policy` to `script-src 'self';
   object-src 'self';` (removed an unused `https://esm.run` remote source).
-- **`browser_specific_settings.gecko.strict_min_version`:** set to `115.0` to
-  declare a supported Firefox baseline.
+- **`browser_specific_settings.gecko.strict_min_version`:** set to `142.0`.
+  This is the first Firefox (desktop + Android) release that supports the
+  required `data_collection_permissions` manifest key (Firefox 115 ESR is EOL
+  by the 2026 release date, so this does not drop any supported Firefox).
+- **`data_collection_permissions`:** declared as
+  `{ "required": ["none"], "optional": [] }` — Firefox now requires this key for
+  all new extensions to disclose data collection. LoLLM collects no user data,
+  hence `"none"`.
 - **Provider switch:** replaced the bundled Google Generative AI (Gemini) SDK
   with a direct, dependency-free `fetch` to an OpenAI-compatible Chat Completion
   endpoint; removed the now-unused `scripts/gemini.js` and

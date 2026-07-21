@@ -158,7 +158,7 @@ function showStatus(tool, on) {
   popup.dataset.status = tool;
   popup.innerHTML = `
     <div style="display:flex;align-items:center;justify-content:space-between;font-weight:bold;margin-bottom:8px;">
-      <span>${capitalize(tool)}\u2026</span>
+      <span id="leaf-status-label">\u2026</span>
       <span id="leaf-close-button" style="cursor:pointer;font-size:20px;">&times;</span>
     </div>
     <div style="height:4px;background-color:#eee;border-radius:2px;overflow:hidden;">
@@ -166,6 +166,8 @@ function showStatus(tool, on) {
     </div>
     <style>@keyframes leafloading{0%{transform:translateX(-100%)}100%{transform:translateX(200%)}}</style>
   `;
+  const label = document.getElementById('leaf-status-label');
+  if (label) label.textContent = capitalize(tool) + '\u2026';
   const btn = document.getElementById('leaf-close-button');
   if (btn) btn.onclick = removePopup;
 }
@@ -190,15 +192,17 @@ function showLoadingIndicator() {
 function showResult(title, text) {
   createPopup();
   if (!popup) return;
-  const safe = String(text).replace(/&/g, '&amp;').replace(/</g, '&lt;')
-    .replace(/>/g, '&gt;').replace(/\n/g, '<br>');
   popup.innerHTML = `
     <div style="display:flex;align-items:center;justify-content:space-between;font-weight:bold;margin-bottom:8px;">
-      <span>${title}</span>
+      <span id="leaf-result-title"></span>
       <span id="leaf-close-button" style="cursor:pointer;font-size:20px;">&times;</span>
     </div>
-    <div>${safe}</div>
+    <div id="leaf-result-body" style="white-space:pre-wrap;"></div>
   `;
+  const titleEl = document.getElementById('leaf-result-title');
+  if (titleEl) titleEl.textContent = title;
+  const bodyEl = document.getElementById('leaf-result-body');
+  if (bodyEl) bodyEl.textContent = text;
   const btn = document.getElementById('leaf-close-button');
   if (btn) btn.onclick = removePopup;
 }

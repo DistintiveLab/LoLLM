@@ -1,8 +1,8 @@
 {
     "manifest_version": 2,
-    "name": "LeafLLM",
+    "name": "LoLLM",
     "version": "1.0.0",
-    "description": "A privacy-respecting LLM extension that runs locally in your browser.",
+    "description": "LoLLM (Leaf open-LLM) - a privacy-respecting LLM extension that runs locally in your browser.",
     "permissions": [
         "storage",
         "contextMenus",
@@ -15,15 +15,15 @@
     "browser_action": {
         "default_popup": "popup/popup.html",
         "default_icon": {
-            "16": "popup/LeafLLM_16.png",
-            "48": "popup/LeafLLM_48.png",
-            "128": "popup/LeafLLM_128.png"
+            "16": "popup/LoLLM_16.png",
+            "48": "popup/LoLLM_48.png",
+            "128": "popup/LoLLM_128.png"
         }
     },
     "icons": {
-        "16": "popup/LeafLLM_16.png",
-        "48": "popup/LeafLLM_48.png",
-        "128": "popup/LeafLLM_128.png"
+        "16": "popup/LoLLM_16.png",
+        "48": "popup/LoLLM_48.png",
+        "128": "popup/LoLLM_128.png"
     },
     "content_scripts": [
         {
@@ -39,8 +39,12 @@
     "content_security_policy": "script-src 'self'; object-src 'self';",
     "browser_specific_settings": {
         "gecko": {
-            "id": "leafllm@bthink.bgu.ac.il",
-            "strict_min_version": "115.0"
+            "id": "lollm@bthink.bgu.ac.il",
+            "strict_min_version": "142.0",
+            "data_collection_permissions": {
+                "required": ["none"],
+                "optional": []
+            }
         }
     }
 }
