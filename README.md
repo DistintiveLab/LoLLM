@@ -16,6 +16,18 @@ Manifest V2, both of which are supported by Firefox. The keyboard-shortcut tools
 (recall the original GPT4Overleaf `Alt+C` / `Alt+I` / `Alt+A`) are implemented
 and described in [Usage](#usage).
 
+## Screenshots
+
+**Settings popup** — configure your API key, endpoint URL and model:
+
+![LoLLM settings popup](popup/LoLLM-screenshot.png)
+
+**Browser toolbar icon:**
+
+<img src="popup/LoLLM_48.png" alt="LoLLM icon" width="48" height="48">
+
+The icon is available in 16×16, 48×48 and 128×128 resolutions.
+
 ## Sponsor
 The development of LoLLM was sponsored by
 [**Distintive**](https://distintive.com.br) — inteligência para políticas
