@@ -1,8 +1,8 @@
 {
     "manifest_version": 2,
     "name": "LoLLM",
-    "version": "1.0.2",
-    "description": "LoLLM (Leaf open-LLM) - a privacy-respecting LLM extension that runs locally in your browser.",
+    "version": "1.0.4",
+    "description": "LoLLM (Leaf on LLM) - a privacy-respecting LLM extension that runs locally in your browser.",
     "permissions": [
         "storage",
         "contextMenus",

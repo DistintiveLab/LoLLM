@@ -1,4 +1,4 @@
-# LoLLM (Leaf open-LLM)
+# LoLLM (Leaf on LLM)
 
 LoLLM (formerly LeafLLM) is a privacy-respecting browser extension that brings
 the power of large-language models (LLMs) into your browser. Right-click any
@@ -28,8 +28,8 @@ and described in [Usage](#usage).
 
 The icon is available in 16×16, 48×48 and 128×128 resolutions.
 
-## Sponsor
-The development of LoLLM was sponsored by
+## Support
+The development of LoLLM was supported by
 [**Distintive**](https://distintive.com.br) — inteligência para políticas
 públicas. Their logo is shown in the extension's settings popup.
 
